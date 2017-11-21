@@ -1,0 +1,25 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+
+# MISC FILES
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.cache
+*.sass-cache/*
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-workspace
+*.sublime-project
+_notes
+dwsync.xml
+logs/*
+node_modules
+*npm-debug.log
+
+
+.vscode/
+.idea
+dist
