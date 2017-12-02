@@ -28,6 +28,9 @@
             "plugins": [
               "postcss-cssnext"
             ]
+          },
+          "less": {
+            "ieCompat": false
           }
         }
       },
