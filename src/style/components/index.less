@@ -16,7 +16,7 @@
 
     @media @show-menu {
       top: -10vw;
-      margin-top: calc(20vw + 1.2em + @menu-height);
+      margin-top: calc( 19.4em);
       right: auto;
       width: 23vw;
       left: @site-padding;
@@ -29,6 +29,7 @@
   .c-header__title {
     width: 120px;
     margin-left: 52%;
+    fill: @green;
 
     svg {
       width: 100%;
@@ -40,5 +41,14 @@
       margin-left: calc(@site-padding + 23vw + 2%);
       svg { height: 10vw; }
     }
+  }
+
+  .c-header__place {
+    margin-left: calc(4% + 23vw + 2%);
+    font-size: 12px;
+    margin-top: -1em;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .5px;
   }
 }
