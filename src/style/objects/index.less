@@ -2,4 +2,22 @@
 
 .o-block {
   padding: 10vw 0;
+  background: @blacklight;
+  color: @green;
+
+  ::selection {
+    background: @green;
+    color: @black;
+    text-shadow: none;
+  }
+
+  &:nth-child(odd) {
+    background: @green;
+    color: #000;
+
+    & ::selection {
+      background: @black;
+      color: @green;
+    }
+  }
 }
