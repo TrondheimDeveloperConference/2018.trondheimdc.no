@@ -27,6 +27,21 @@
     }
   }
 
+  .c-header__logo--in-menu {
+    position: fixed;
+    top: 0;
+    left: @site-padding;
+    width: 80px;
+    z-index: 11;
+    margin-top: 0;
+    transition-delay: .2s;
+
+    & svg {
+      fill: #000;
+      height: @menu-height;
+    }
+  }
+
   .c-header__title {
     width: 120px;
     margin-left: 52%;
