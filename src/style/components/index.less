@@ -17,7 +17,7 @@
 
     @media @show-menu {
       top: -10vw;
-      margin-top: calc( 19.4em);
+      margin-top: ~" calc(20vw + 1.2em + 70px)";
       right: auto;
       width: 23vw;
       left: @site-padding;
@@ -99,5 +99,14 @@
     &:nth-child(7) { grid-column: ~"7/9"; }
     &:nth-child(9) { grid-column: ~"9"; }
 
+    &::after {
+      .fill-parent;
+      content: '';
+      background: @green;
+      mix-blend-mode: hue;
+      transition: opacity .5s ease;
+    }
+
+    &:hover::after { opacity: 0; }
   }
 }
