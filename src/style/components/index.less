@@ -167,4 +167,16 @@
   @media @show-menu {
     display: none;
   }
+
+  &.show--menu {
+    &::before {
+      transform: rotate(-45deg);
+      border-top-color: transparent;
+    }
+
+    &::after {
+      transform: rotate(45deg);
+      border-bottom-color: transparent;
+    }
+  }
 }
