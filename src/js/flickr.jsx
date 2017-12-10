@@ -48,7 +48,7 @@ class FlickrImages extends React.Component {
         return <ul className='unstyled c-imagelist'>
             {this.state.photos.map(p =>
                 <li className='c-imagelist__image' key={p.id}>
-                    <img src={`https://farm${p.farm}.staticflickr.com/${p.server}/${p.id}_${p.secret}_c.jpg`} />
+                    <img src={`https://farm${p.farm}.staticflickr.com/${p.server}/${p.id}_${p.secret}_z.jpg`} />
                 </li>
             )}
         </ul>;
