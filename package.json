@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "buddy": "buddy",
-    "build": "buddy deploy",
+    "build": "NODE_ENV=production & buddy deploy",
     "watch": "buddy watch --serve --reload"
   },
   "devDependencies": {
@@ -54,7 +54,9 @@
     "build": [
       {
         "input": "src/js/main.js",
-        "output": "dist/js/main.min.js",
+        "output": "dist/js/main.min%hash%.js",
+        "output_compressed": "dist/js/main.min-%hash%.js",
+        "label": "js",
         "version": [
           "es5",
           "react"
@@ -62,7 +64,9 @@
       },
       {
         "input": "src/style/styles.less",
-        "output": "dist/styles.css",
+        "output": "dist/css/styles.css",
+        "output_compressed": "dist/css/styles-%hash%.css",
+        "label": "css",
         "options": {
           "postcss": {
             "plugins": [
@@ -76,7 +80,8 @@
       },
       {
         "input": "src/index.html",
-        "output": "dist"
+        "output": "dist",
+        "label": "html"
       }
     ]
   }
