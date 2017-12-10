@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "buddy": "buddy",
-    "build": "NODE_ENV=production & buddy deploy",
+    "build": "NODE_ENV=production & buddy deploy & ./copyFavicons.js",
     "watch": "buddy watch --serve --reload"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "buddy-cli": "^6.1.0",
     "buddy-plugin-less": "2.7.3",
     "buddy-server": "3.1.0",
+    "copy": "^0.3.1",
     "less": "2.7.3",
     "normalize.css": "7.0.0",
     "postcss-cssnext": "3.0.2"
@@ -54,8 +55,8 @@
     "build": [
       {
         "input": "src/js/main.js",
-        "output": "dist/js/main.min%hash%.js",
-        "output_compressed": "dist/js/main.min-%hash%.js",
+        "output": "dist/js/main%hash%.js",
+        "output_compressed": "dist/js/main-%hash%.js",
         "label": "js",
         "version": [
           "es5",
