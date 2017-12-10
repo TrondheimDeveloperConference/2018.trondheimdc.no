@@ -2,6 +2,10 @@
 @import "../tools/index";
 
 .c-header {
+  padding: 10vw 0;
+  background: #282828;
+  color: #9EC41B;
+
   .c-header__logo {
     position: absolute;
     fill: @green;
@@ -123,5 +127,44 @@
     }
 
     &:hover::after { opacity: 0; }
+  }
+}
+
+.c-toggle-menu {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 0;
+  line-height: 0;
+  background: #fff;
+  border: 0;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  outline: 0;
+
+  &::before,&::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    border-top: 2px solid #000;
+    left: 50%;
+    width: 26px;
+    margin-left: -13px;
+    height: 9px;
+    border-bottom: 2px solid #000;
+    transition: transform .2s @ease, border .2s @ease;
+    transform-origin: center top;
+  }
+
+  &::before {
+    margin-top: -7px;
+    transform-origin: center bottom;
+  }
+
+  @media @show-menu {
+    display: none;
   }
 }
