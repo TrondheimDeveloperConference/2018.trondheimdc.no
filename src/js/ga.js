@@ -27,7 +27,7 @@ export default function installAnalytics(){
                 localStorage.setItem('tdc-client-uuid', clientuuid);
             }
 
-            ga('create','UA-98174789-1', {
+            ga('create','UA-98174789-3', {
                 'storage': 'none',
                 'storeGac': false,
                 'clientId': clientuuid
