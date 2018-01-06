@@ -1,3 +1,5 @@
+import uuid from 'uuid';
+
 export default function installAnalytics(){
     try {
         let hash = location.hash;
