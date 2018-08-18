@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "buddy": "buddy",
-    "build": "NODE_ENV=production & buddy deploy & ./copyFavicons.js",
-    "watch": "buddy watch --serve --reload"
+    "build": "NODE_ENV=production & buddy deploy --maps & ./copyFavicons.js",
+    "watch": "buddy watch --serve --reload --maps"
   },
   "devDependencies": {
     "babel-plugin-syntax-jsx": "6.18.0",
