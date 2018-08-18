@@ -63,11 +63,22 @@
           "es5",
           "react"
         ]
-      },{
+      },
+      {
         "input": "src/js/speaker.js",
         "output": "dist/js/speaker%hash%.js",
         "output_compressed": "dist/js/speaker-%hash%.js",
         "label": "speaker",
+        "version": [
+          "es5",
+          "react"
+        ]
+      },
+      {
+        "input": "src/js/program.js",
+        "output": "dist/js/program%hash%.js",
+        "output_compressed": "dist/js/program-%hash%.js",
+        "label": "program",
         "version": [
           "es5",
           "react"
@@ -90,7 +101,7 @@
         }
       },
       {
-        "input": ["src/index.html", "src/speaker.html"],
+        "input": ["src/index.html", "src/speaker.html", "src/program.html"],
         "output": "dist",
         "label": "html"
       }
