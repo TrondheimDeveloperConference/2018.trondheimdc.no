@@ -1,11 +1,11 @@
 import registerLogoScrollListener from './logo';
 import registerMenuToggler from './menu_button';
 import installAnalytics from './ga';
-import renderSpeakerList from "./sessionList";
+import renderProgram from "./tableprogram";
 
 installAnalytics();
 
 registerLogoScrollListener();
 registerMenuToggler();
 
-renderSpeakerList(document.getElementById('programcontrainer'));
+renderProgram(document.getElementById('programcontrainer'));

@@ -29,9 +29,22 @@ const addFavourites = (program) => {
 };
 
 const mapBySlot = (program) => {
+
     return {
         ...program,
-        slots: []
+        slots: program.sessions
+            .filter(s => s.format === 'presentation')
+            .sort((a, b) => a.room.localeCompare(b))
+            .reduce((acc, curr) => {
+                const startTime = curr.startTime;
+                if(!acc[startTime]) {
+                    acc[startTime] = [curr]
+                } else {
+                    acc[startTime].push(curr);
+                }
+                return acc
+            }, {})
+
     }
 };
 
@@ -53,7 +66,8 @@ class Program extends React.Component {
         getProgram()
             .then(addFavourites)
             .then(mapBySlot)
-            .then(program => this.setState({program}));
+            .then(program => this.setState({program}))
+            .catch(error => console.log(error));
         stateHandler = (newProgramState) => {
             this.setState({newProgramState});
             localStorage.setItem('favourites', JSON.stringify(state.favourites))
@@ -62,7 +76,7 @@ class Program extends React.Component {
     }
 
     render() {
-        const slots = [];
+        const slots = this.state.program.slots;
         return <div>
             <section className='c-program'>
                 <div className='c-program__roomColumns c-roomColumns'>
