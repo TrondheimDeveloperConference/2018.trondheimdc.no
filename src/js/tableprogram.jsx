@@ -30,20 +30,27 @@ const addFavourites = (program) => {
 
 const mapBySlot = (program) => {
 
+    const slotsByTime = program.sessions
+        .filter(s => s.format === 'presentation')
+        .sort((a, b) => a.room.localeCompare(b))
+        .reduce((acc, curr) => {
+            const startTime = curr.startTime;
+            if(!acc[startTime]) {
+                acc[startTime] = [curr]
+            } else {
+                acc[startTime].push(curr);
+            }
+            return acc
+        }, {});
+
     return {
         ...program,
-        slots: program.sessions
-            .filter(s => s.format === 'presentation')
-            .sort((a, b) => a.room.localeCompare(b))
-            .reduce((acc, curr) => {
-                const startTime = curr.startTime;
-                if(!acc[startTime]) {
-                    acc[startTime] = [curr]
-                } else {
-                    acc[startTime].push(curr);
-                }
-                return acc
-            }, {})
+        slots: Object.keys(slotsByTime)
+            .sort()
+            .map(time => ({
+                startTime: time.replace('2018-10-22T', ''),
+                sessions: slotsByTime[time]
+            }))
 
     }
 };
@@ -85,9 +92,10 @@ class Program extends React.Component {
                             Sal <span className='c-roomColumn__number'>{num}</span>
                         </div>)}
                 </div>
-                {slots.map(slot => <div className='c-slot' data-time={slot.startTime}>
-                    {slot.sessions.map(session => <Session session={session} />)}
-                </div>)}
+                {slots.map(slot => (
+                    <div className='c-slot' data-time={slot.startTime} key={slot.startTime}>
+                        {slot.sessions.map(session => <Session session={session} key={session.sessionId} />)}
+                    </div>))}
             </section>
             <SessionModal session={this.state.highlightedSession} />
         </div>;
@@ -119,7 +127,13 @@ class Session extends React.Component {
                 </span>
             </aside>
             <h1 className='c-session_title'>{session.title}</h1>
-            <span className='c-session__speaker'>{session.speakers}</span>
+            <span className='c-session__speaker'>{
+                session.speakers
+                    .map(s => s.name)
+                    .reduce((acc, curr) => {
+                       return `${acc} ${curr}`
+                    }, '')
+            }</span>
             <FavouriteButton session={session} />
         </article>;
     }
