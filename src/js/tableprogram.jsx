@@ -119,7 +119,7 @@ class Session extends React.Component {
     render() {
         const session = this.props.session;
         const favouriteClass = session.isFavourite ? 'c-session--favourite' : '';
-        return <article className={`c-session ${favouriteClass}`}>
+        return <article className={`c-session ${favouriteClass} length${session.length}`}>
             <aside className={'c-session__timeplace c-timeplace'}>
                 <time className='c-timeplace__time'>{session.startTime}</time>
                 <span className='c-roomColumn c-timeplace__place'>
