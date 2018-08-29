@@ -29,7 +29,13 @@ class SessionList extends React.Component {
 
     componentDidMount() {
         getProgram()
-            .then(program => this.setState({program}))
+            .then(program => {
+                this.setState({
+                    program : {
+                        sessions: program.sessions.filter(s => s.title.toLowerCase().indexOf('part 2') === -1)
+                    }
+                })
+            })
     }
 
     render() {
@@ -58,7 +64,6 @@ class Session extends React.Component {
         const session = this.props.session;
         return <div className='c-session'>
             <h2 className='c-session__title'>{session.title}</h2>
-            <p className='c-session__abstract'>{session.abstract}</p>
             <ul className='c-session__speakers unstyled'>
                 {session.speakers.map(s => <li key={s.name}><Speaker speaker={s} /></li>)}
             </ul>
