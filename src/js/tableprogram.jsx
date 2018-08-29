@@ -1,19 +1,9 @@
 import ReactDOM from "react-dom";
 import React from "react";
+import getProgram from './api';
 
 export default function renderProgram(domNode) {
     ReactDOM.render(<Program />, domNode);
-}
-
-function getProgram() {
-    return new Promise((resolve, reject) => {
-        const url = 'https://api.trondheimdc.no/public/allSessions/TDC2018';
-        fetch(url)
-            .then(response => response.json())
-            .then(response => {
-                return resolve(response)
-            })
-    });
 }
 
 let stateHandler = () => {};

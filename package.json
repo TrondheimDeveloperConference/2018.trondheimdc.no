@@ -85,6 +85,16 @@
         ]
       },
       {
+        "input": "src/js/workshops.js",
+        "output": "dist/js/workshops%hash%.js",
+        "output_compressed": "dist/js/workshops-%hash%.js",
+        "label": "workshops",
+        "version": [
+          "es5",
+          "react"
+        ]
+      },
+      {
         "input": "src/style/styles.less",
         "output": "dist/css/styles.css",
         "output_compressed": "dist/css/styles-%hash%.css",
@@ -101,7 +111,7 @@
         }
       },
       {
-        "input": ["src/index.html", "src/speaker.html", "src/program.html"],
+        "input": ["src/index.html", "src/speaker.html", "src/program.html", "src/workshops.html"],
         "output": "dist",
         "label": "html"
       }

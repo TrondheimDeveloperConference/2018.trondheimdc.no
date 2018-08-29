@@ -1,19 +1,9 @@
 import ReactDOM from "react-dom";
 import React from "react";
+import getProgram from './api';
 
 export default function renderSpeakerList(domNode) {
     ReactDOM.render(<SessionList />, domNode);
-}
-
-function getProgram() {
-    return new Promise((resolve, reject) => {
-        const url = 'https://api.trondheimdc.no/public/allSessions/TDC2018';
-        fetch(url)
-            .then(response => response.json())
-            .then(response => {
-                return resolve(response)
-            })
-    });
 }
 
 class SessionList extends React.Component {
@@ -32,7 +22,9 @@ class SessionList extends React.Component {
             .then(program => {
                 this.setState({
                     program : {
-                        sessions: program.sessions.filter(s => s.title.toLowerCase().indexOf('part 2') === -1)
+                        sessions: program.sessions
+                            .filter(s => s.format === 'presentation')
+                            .filter(s => s.title.toLowerCase().indexOf('part 2') === -1)
                     }
                 })
             })
@@ -41,7 +33,6 @@ class SessionList extends React.Component {
     render() {
         return <ul className='unstyled c-sessionlist'>
             {this.state.program.sessions
-                .filter(s => s.format === 'presentation')
                 .map(s =>
                 <li className='c-sessionlist__session' key={s.sessionId}>
                     <Session session={s}/>
