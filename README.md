@@ -1,5 +1,9 @@
 # 2018.trondheimdc.no
 
+## Develop
+* `npm run watch`
+* Open http://localhost:8000
+
 ## Deploy
 
 * `npm run build`
