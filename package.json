@@ -37,16 +37,16 @@
     "buddy": "6.14.7",
     "buddy-cli": "^6.1.0",
     "buddy-plugin-less": "2.7.3",
-    "buddy-server": "3.1.0",
+    "buddy-server": "^3.1.1",
     "copy": "^0.3.1",
-    "less": "2.7.3",
-    "normalize.css": "7.0.0",
-    "postcss-cssnext": "3.0.2"
+    "less": "3.8.1",
+    "normalize.css": "8.0.0",
+    "postcss-cssnext": "3.1.0"
   },
   "dependencies": {
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "uuid": "3.1.0"
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "uuid": "3.3.2"
   },
   "buddy": {
     "server": {
@@ -111,7 +111,12 @@
         }
       },
       {
-        "input": ["src/index.html", "src/speaker.html", "src/program.html", "src/workshops.html"],
+        "input": [
+          "src/index.html",
+          "src/speaker.html",
+          "src/program.html",
+          "src/workshops.html"
+        ],
         "output": "dist",
         "label": "html"
       }
