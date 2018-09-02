@@ -91,8 +91,11 @@ class Speaker extends React.Component {
     render() {
         const speaker = this.props.speaker;
         return <div className='c-speaker'>
-            <span className='c-speaker__name'>{speaker.name}</span>
+          
+          <div class="c-speaker__info">
             <img src={profilePicture(speaker.pictureUrl)} alt={`Profile image ${speaker.name}`} />
+            <span className='c-speaker__name'>{speaker.name}</span>
+          </div>
             <p className='c-speaker__bio'>{speaker.bio}</p>
         </div>;
     }
