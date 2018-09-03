@@ -92,7 +92,7 @@ class Speaker extends React.Component {
         const speaker = this.props.speaker;
         return <div className='c-speaker'>
           
-          <div class="c-speaker__info">
+          <div className="c-speaker__info">
             <img src={profilePicture(speaker.pictureUrl)} alt={`Profile image ${speaker.name}`} />
             <span className='c-speaker__name'>{speaker.name}</span>
           </div>
