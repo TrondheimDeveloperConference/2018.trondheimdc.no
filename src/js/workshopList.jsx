@@ -45,7 +45,7 @@ const programutvikling = [
     '3eca0f4eef144f92af06bd2c690b83ec',
     'fe165087637043a29acf9760bf8cb8a0',
     '636a9c63ac78464e907da64923523ba4',
-    '30d5c2f1cb214fc8b0649a44fdf3b4bf'
+    '60d1bb9774204aa4810035779a41732f'
 ];
 const unity = '609ceea89a5f45d48b397fafc58623d1';
 const java = '2c98ae61c0214cad8fb2c7ef1a894620';
