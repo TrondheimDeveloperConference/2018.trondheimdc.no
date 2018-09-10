@@ -1,0 +1,274 @@
+@import url("settings/index");
+
+.c-program {
+  font-family: 'Roboto Mono';
+  -webkit-font-smoothing: antialiased;
+  padding: 3vw 0;
+
+  .c-roomsColumns { display: none; }
+
+  .break {
+    border: 1px solid @green;
+    text-align: center;
+    margin: 0 24px 40px;
+    padding: 6px 0;
+    font-size: 12px;
+
+    &.lunch,&.party { padding: 46px 0; }
+
+    & b { color: #fff; }
+  }
+
+  .c-slot {
+    padding: 0 24px;
+    margin-bottom: 40px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-left: 4px solid @green;
+    }
+  }
+
+  .c-session {
+    margin-top: 18px;
+    display: flex;
+    min-height: 60px;
+
+    .fake { display: none; }
+
+    .c-session__timeplace {
+      width: 46px;
+      color: #fff;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .c-timeplace__time {
+      border-bottom: 4px solid @green;
+      display: block;
+    }
+
+    .c-roomColumn__number { color: @green; }
+
+    .c-session_maincontent {
+      width: calc(100% - 59px - 40px);
+      margin-left: 13px;
+      border: 1px solid @gray;
+      border-right: 0;
+      padding: 10px;
+      position: relative;
+      transition: color .2s @ease;
+      cursor: pointer;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        bottom: 0;
+        background: @green;
+        transition: width .3s @ease, background .2s @ease;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: @gray;
+        opacity: 0;
+      }
+    }
+
+    & h4, & h5 {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.3em;
+      text-transform: none;
+      letter-spacing: -.3px;
+      position: relative;
+    }
+
+    & h4 { font-weight: normal; }
+
+    & h5 {
+      padding-left: 14px;
+      margin-top: .4em;
+
+      &::before {
+        content: '> ';
+        position: absolute;
+        left: 0;
+        color: #fff;
+        font-weight: normal;
+      }
+    }
+
+    .c-favouritebtn {
+      width: 40px;
+      font-size: 12px;
+      text-align: center;
+      display: flex;
+      padding-right: 2px;
+      position: relative;
+      border: 1px solid @green;
+      cursor: pointer;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        bottom: 0;
+        background: @green;
+        transition: width .2s @ease;
+      }
+
+      .c-favouritebtn__fav {
+        margin: auto;
+        position: relative;
+      }
+
+      & .no { color: #fff; }
+    }
+
+    .c-session--favourite {
+      .c-session_maincontent {
+        color: #000;
+        border-color: @green;
+        transition: color .2s .2s @ease, transform .2s @ease, border 0s .2s;
+
+        &::before { width: 100%; }
+        &::after { background: @green; }
+      }
+
+      & .fav-toggle {
+        & .no { color: inherit; }
+        & .yes { color: #fff; }
+      }
+    }
+  }
+
+  @media (min-width: 600px) {
+    .c-slot {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      position: relative;
+
+      &::before { top: 40px; }
+    }
+
+    .c-session {
+      width: 48%;
+      display: inline-flex;
+      position: relative;
+      margin-top: 40px;
+
+      .c-session__timeplace {
+        display: block;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        font-size: 12px;
+        width: 100%;
+        text-align: left;
+      }
+
+      .c-timeplace__time {
+        display: inline-block;
+        border: 0;
+      }
+
+      .c-session_maincontent {
+        width: calc(100% - 40px);
+        margin: 0;
+        transition: transform .2s @ease, border 0s .2s;
+        background: var(--black);
+        z-index: 2;
+      }
+
+      &.is-fav .fav-toggle::before {
+        right: auto;
+        left: 0;
+      }
+    }
+/*
+  @nest .no-touch & {
+    & .sesh section:hover { background: var(--blacklight); }
+    & .sesh.is-fav section:hover::before { background: color(@green lightness(48%)); }
+
+    & .fav-toggle:hover {
+      color: var(--black);
+
+      &::before { width: 100%; }
+    }
+  }*/
+  }
+
+  @media (min-width: 950px) {
+    & .slot { margin-bottom: 100px; }
+    & .sesh { width: 30%; }
+  }
+
+  @media (min-width: 1400px) {
+    & .roomsColumns {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 24px 0 74px;
+      margin-bottom: 15px;
+
+      & div {
+        width: 18.5%;
+        font-size: 12px;
+        border-bottom: 1px solid @green;
+
+        & span { color: #fff; }
+      }
+    }
+
+    & .break {
+      margin-left: 74px;
+      margin-top: 40px;
+    }
+
+    & .slot {
+      padding-left: 74px;
+      margin-bottom: 1.5%;
+
+      &::before {
+        content: attr(data-time);
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 20px;
+        font-size: 12px;
+        width: 35px;
+        border: 0;
+        bottom: auto;
+        border-bottom: 1px solid @green;
+      }
+    }
+
+    & .sesh {
+      width: 18.5%;
+      margin-top: 0;
+
+      &.fake {
+        background: var(--blacklight);
+        display: block;
+      }
+
+      & aside { display: none; }
+    }
+  }
+}
