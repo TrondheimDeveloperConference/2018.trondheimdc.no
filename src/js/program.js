@@ -3,7 +3,7 @@ import registerMenuToggler from './menu_button';
 import installAnalytics from './ga';
 //import renderProgram from "./tableprogram";
 import renderSpeakerList from './sessionList';
-installAnalytics();
+//installAnalytics();
 
 registerLogoScrollListener();
 registerMenuToggler();

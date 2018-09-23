@@ -3,7 +3,7 @@ import registerLogoScrollListener from './logo';
 import registerMenuToggler from './menu_button';
 import installAnalytics from './ga';
 
-installAnalytics();
+//installAnalytics();
 flickrImages(document.getElementById('flickr-images'));
 
 registerLogoScrollListener();
