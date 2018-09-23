@@ -1,3 +1,6 @@
+import polyfill from 'babel-polyfill';
+import fetch_polyfill from 'whatwg-fetch';
+
 import registerLogoScrollListener from './logo';
 import registerMenuToggler from './menu_button';
 //import installAnalytics from './ga';
