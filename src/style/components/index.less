@@ -288,3 +288,30 @@
   margin-top: 0.5rem;
   font-size: 12px;
 }
+
+.c-sponsors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  & a {
+    transition: color 200ms;
+    margin: 1rem 5px;
+  }
+
+  & svg {
+    width: 150px;
+    height: 150px;
+    display: block;
+  }
+
+  & img { width: 100px; }
+
+  @media (min-width: 520px) {
+    & svg {
+      width: 225px;
+    }
+
+    & img { width: 220px; }
+  }
+}
