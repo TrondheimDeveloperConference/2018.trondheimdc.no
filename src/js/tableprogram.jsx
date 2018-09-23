@@ -22,7 +22,6 @@ const mapBySlot = (program) => {
 
     const slotsByTime = program.sessions
         .filter(s => s.format === 'presentation')
-        .sort((a, b) => a.room.localeCompare(b))
         .reduce((acc, curr) => {
             const startTime = curr.startTime;
             if(!acc[startTime]) {
@@ -33,16 +32,17 @@ const mapBySlot = (program) => {
             return acc
         }, {});
 
-    return {
+    const mapped = {
         ...program,
         slots: Object.keys(slotsByTime)
             .sort()
             .map(time => ({
                 startTime: time.replace('2018-10-22T', ''),
-                sessions: slotsByTime[time]
+                sessions: slotsByTime[time].sort((a, b) => a.room.localeCompare(b.room))
             }))
 
-    }
+    };
+    return mapped
 };
 
 class Program extends React.Component {
@@ -76,14 +76,9 @@ class Program extends React.Component {
         const slots = this.state.program.slots;
         return <div>
             <section className='c-program'>
-                <div className='c-program__roomColumns c-roomColumns'>
-                    {[1, 2, 3, 4, 5]
-                        .map(num => <div className='c-roomColumns__column c-roomColumn' key={`room${num}`}>
-                            Sal <span className='c-roomColumn__number'>{num}</span>
-                        </div>)}
-                </div>
                 {slots.map(slot => (
                     <div className='c-slot' data-time={slot.startTime} key={slot.startTime}>
+                        <h3 className='c-slot__time'>{slot.startTime}</h3>
                         {slot.sessions.map(session => <Session session={session} key={session.sessionId} />)}
                     </div>))}
             </section>
@@ -110,21 +105,19 @@ class Session extends React.Component {
         const session = this.props.session;
         const favouriteClass = session.isFavourite ? 'c-session--favourite' : '';
         return <article className={`c-session ${favouriteClass} length${session.length}`}>
-            <aside className={'c-session__timeplace c-timeplace'}>
-                <time className='c-timeplace__time'>{session.startTime}</time>
-                <span className='c-roomColumn c-timeplace__place'>
-                    Sal <span className='c-roomColumn__number'>{session.roomNumber}</span>
-                </span>
-            </aside>
-            <h1 className='c-session_title'>{session.title}</h1>
-            <span className='c-session__speaker'>{
+            <h1 className='c-session_title'>
+                <span className='c-session_title__room'>{session.room} - </span>
+                <span className='c-session_title__title'>{session.title}</span>
+                </h1>
+            <ul className='c-session__speakers'>{
                 session.speakers
                     .map(s => s.name)
                     .reduce((acc, curr) => {
                        return `${acc} ${curr}`
                     }, '')
-            }</span>
-            <FavouriteButton session={session} />
+            }</ul>
+            <span className='c-session__duration'>Duration: {session.length} minutes</span>
+            <p className='abstract'>{session.abstract}</p>
         </article>;
     }
 }
