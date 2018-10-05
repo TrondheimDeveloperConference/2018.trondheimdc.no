@@ -11,7 +11,8 @@ let stateGetter = () => null;
 
 const addFavourites = (program) => {
     const fromStorage = localStorage.getItem('favourites');
-    const favourites = fromStorage ? JSON.parse(fromStorage) : [];
+    const favourites = fromStorage !== 'undefined' ? JSON.parse(fromStorage) : [];
+
     return {
         ...program,
         favourites
@@ -42,7 +43,8 @@ const mapBySlot = (program) => {
             }))
 
     };
-    return mapped
+
+    return mapped;
 };
 
 class Program extends React.Component {
@@ -65,59 +67,73 @@ class Program extends React.Component {
             .then(mapBySlot)
             .then(program => this.setState({program}))
             .catch(error => console.log(error));
-        stateHandler = (newProgramState) => {
-            this.setState({newProgramState});
-            localStorage.setItem('favourites', JSON.stringify(state.favourites))
-        };
+
         stateGetter = () => this.state
+        stateHandler = (newState) => {
+            // this.setState({newState});
+            this.setState({program: newState});
+            localStorage.setItem('favourites', JSON.stringify(this.state.favourites))
+        };
+
     }
 
     render() {
         const slots = this.state.program.slots;
+        const highlighted = this.state.program.highlightedSession;
         return <div>
             <section className='c-program'>
+              <div className="c-slot">
+              <div className='c-slot__sessions hidden-on-mobile'>
+                {['1','2','3', '4', '5'].map( room => (
+                  <div key={room} className="c-slot__room accent-border">Sal <span className="text-white">{room}</span></div>
+                ))}
+              </div>
+              </div>
                 {slots.map(slot => (
                     <div className='c-slot' data-time={slot.startTime} key={slot.startTime}>
-                        <h3 className='c-slot__time'>{slot.startTime}</h3>
-                        {slot.sessions.map(session => <Session session={session} key={session.sessionId} />)}
+                      <h3 className='c-slot__time m-0 text-white'>
+                        <div className="accent-border inline-block text-bold">
+                        {slot.startTime}
+                        </div>
+                      </h3>
+                        <div className="c-slot__sessions">
+                          {slot.sessions.map(session => <Session session={session} key={session.sessionId} />)}
+                        </div>
                     </div>))}
             </section>
-            <SessionModal session={this.state.highlightedSession} />
+        <SessionModal key="omg" session={highlighted} />
         </div>;
     }
 }
-
-const setModalSession = (session) => {
-    const state = stateGetter();
-
-    stateHandler({
-        ...state,
-        highlightedSession: session
-    });
-};
 
 class Session extends React.Component {
     constructor(props) {
         super(props);
     }
 
+
     render() {
         const session = this.props.session;
         const favouriteClass = session.isFavourite ? 'c-session--favourite' : '';
-        return <article className={`c-session ${favouriteClass} length${session.length}`}>
-            <h1 className='c-session_title'>
-                <span className='c-session_title__room'>{session.room} - </span>
-                <span className='c-session_title__title'>{session.title}</span>
-                </h1>
-            <ul className='c-session__speakers'>{
-                session.speakers
-                    .map(s => s.name)
-                    .reduce((acc, curr) => {
-                       return `${acc} ${curr}`
-                    }, '')
-            }</ul>
-            <span className='c-session__duration'>Duration: {session.length} minutes</span>
-            <p className='abstract'>{session.abstract}</p>
+        return <article className={`c-session ${favouriteClass} length${session.length}`} onClick={() => setModalSession(session)} style={{ '--room': session.room.replace(' ', '').toLowerCase()}}>
+            <h1 className='c-session__info'>
+              <span className='c-session_title__title'>{session.title}</span>
+            </h1>
+            <div className='c-session__speakers'>{
+              session.speakers
+                .map(s => s.name)
+                .reduce((acc, curr) => {
+                   return `${acc} ${curr}`
+                  }, '')
+                }
+                <span className="hidden-on-desktop c-session__room">,
+                <span className=' text-white block text-bold mr-4'> {session.room}</span>
+                </span>
+            </div>
+            <div className="c-session__expanded">
+              <span className='c-session__duration'>Duration: {session.length} minutes</span>
+              <p className='abstract'>{session.abstract}</p>
+            </div>
         </article>;
     }
 }
@@ -126,7 +142,7 @@ const toggleFavourite = (sessionId) => {
     const state = stateGetter();
 
     stateHandler({
-        ...state,
+        ...state.program,
         favourites : [sessionId]
     });
 };
@@ -146,34 +162,54 @@ class FavouriteButton extends React.Component {
     }
 }
 
+const setModalSession = (session) => {
+    const state = stateGetter();
+
+    stateHandler({
+        ...state.program,
+        highlightedSession: session
+    });
+};
+
 class SessionModal extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor({session}) {
+        super();
+        this.state = { session }
+    }
+
+    componentWillReceiveProps({session}){
+      this.setState({...this.state, session})
     }
 
     render() {
-        if(this.props.session) {
+        // const session = this.props.session;
+        const session = this.state.session;
+      console.log(session);
+        if(session) {
             const session = this.props.session;
-            return <section className='c-session-modal'>
-                <span className='c-session-modal__close'>close</span>
+            return <section className='c-modal'>
+              <div className="c-modal__inner">
+                <button className='c-session-modal__close'>close</button>
                 <article className='c-session-modal__open-session c-open-session'>
-                    <header>
-                        <h1 className='c-open-session__title'>{session.title}</h1>
+                    <header className="c-modal__header">
+                        <h1 className='accent-border inline-block'>{session.title}</h1>
                         <div className='c-open-session__info c-session-info'>
                             <div className='c-session-info__fields c-fields'>
                                 <dl className='c-field'>
                                     <dt>Name:</dt>
                                     <dd className='c-fields__name'>
-                                        {session.speakers}
+                                      {session.speakers.map(s => s.name)}
                                     </dd>
                                     <dt>Time:</dt>
                                     <dt className='c-fields__time'>
-                                        {session.starttime}
+                                        {session.startTime}
                                     </dt>
                                     <dt>Room:</dt>
                                     <dd className='c-fields__room'>{session.room}</dd>
                                     <dt>Favourite</dt>
-                                    <dd><FavouriteButton session={session} /></dd>
+            {/* 
+                                    <dd><FavouriteButton key={session.id} session={session} /></dd>
+                */}
                                 </dl>
 
                             </div>
@@ -188,7 +224,7 @@ class SessionModal extends React.Component {
 
                         <h2>Speakers</h2>
                         {session.speakers
-                            .map(speaker => <figure key={speaker.id}>
+                            .map(speaker => <figure key={speaker.name}>
                                 <img
                                     className='c-open-session__speakerimage'
                                     src={profilePicture(speaker.pictureUrl)} alt={`Profile image ${speaker.name}`} />
@@ -198,6 +234,7 @@ class SessionModal extends React.Component {
                             </figure>)}
                     </section>
                 </article>
+            </div>
             </section>;
         } else {
             return null;
