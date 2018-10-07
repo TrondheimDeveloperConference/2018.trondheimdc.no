@@ -72,7 +72,8 @@ class Session extends React.Component {
     static getRegistration(sessionId) {
         if(programutvikling.indexOf(sessionId) !== -1) {
             return <p>
-                Registration: Choose this workshop when buying <a href='https://tdc.hoopla.no/sales/2829805313'>your ticket</a>
+                Registration: Choose this workshop when buying <a href='https://tdc.hoopla.no/sales/2829805313'>your ticket</a> for a discounted bundle price. 
+                You can also order ticket for the workshop directly from <a href='https://programutvikling.no/search/results?q=trondheim&submit=Search'>ProgramUtvikling</a>.
             </p>
         } else if (sessionId === java) {
             return <p>
