@@ -102,6 +102,11 @@
         "output_compressed": "dist/css/styles-%hash%.css",
         "label": "css",
         "options": {
+          "cssnano": {
+            "reduceIdents": {
+              "gridTemplate": false
+            }
+          },
           "postcss": {
             "plugins": [
               "postcss-cssnext"
