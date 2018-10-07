@@ -84,9 +84,11 @@ class Program extends React.Component {
             <section className='c-program'>
               <div className="c-slot">
               <div className='c-slot__sessions hidden-on-mobile'>
-                {['1','2','3', '4', '5'].map( room => (
-                  <div key={room} className="c-slot__room accent-border">Sal <span className="text-white">{room}</span></div>
-                ))}
+                <div key="1" className="c-slot__room accent-border">Sal <span className="text-white">Cosmos 2</span></div>
+                <div key="2" className="c-slot__room accent-border">Sal <span className="text-white">Cosmos 1A</span></div>
+                <div key="3" className="c-slot__room accent-border">Sal <span className="text-white">Cosmos 1B</span></div>
+                <div key="4" className="c-slot__room accent-border">Sal <span className="text-white">Cosmos 3A</span></div>
+                <div key="5" className="c-slot__room accent-border">Sal <span className="text-white">Cosmos 3B</span></div>
               </div>
               </div>
                 {slots.map(slot => (
