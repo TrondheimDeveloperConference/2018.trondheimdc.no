@@ -79,6 +79,10 @@ class Session extends React.Component {
             return <p>
                 Registration: <a href='https://www.meetup.com/javaBin-Trondheim/events/252158179/'> at Meetup.com</a>
             </p>
+        } else if (sessionId === unity) {
+            return <p>
+                Registration: <a href='https://www.meetup.com/Unity-Midt-Norge/events/255361180/'> at Meetup.com</a>
+            </p>
         }
         return <p>Registration: To be determined</p>
     }
