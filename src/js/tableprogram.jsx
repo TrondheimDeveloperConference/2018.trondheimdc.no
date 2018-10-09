@@ -68,7 +68,7 @@ class Program extends React.Component {
             .then(program => this.setState({program}))
             .catch(error => console.log(error));
 
-        stateGetter = () => this.state
+        stateGetter = () => this.state;
         stateHandler = (newState) => {
             // this.setState({newState});
             this.setState({program: newState});
@@ -186,12 +186,13 @@ class SessionModal extends React.Component {
     render() {
         // const session = this.props.session;
         const session = this.state.session;
-      console.log(session);
         if(session) {
             const session = this.props.session;
-            return <section className='c-modal'>
-              <div className="c-modal__inner">
-                <button className='c-session-modal__close'>close</button>
+            const closeModal = () => setModalSession(null);
+
+            return <section className='c-modal' onClick={closeModal}>
+              <div className="c-modal__inner" onClick={(e) => e.stopPropagation()}  >
+                <button className='c-session-modal__close' onClick={closeModal}>close</button>
                 <article className='c-session-modal__open-session c-open-session'>
                     <header className="c-modal__header">
                         <h1 className='accent-border inline-block'>{session.title}</h1>
@@ -207,11 +208,7 @@ class SessionModal extends React.Component {
                                         {session.startTime}
                                     </dt>
                                     <dt>Room:</dt>
-                                    <dd className='c-fields__room'>{session.room}</dd>
-                                    <dt>Favourite</dt>
-            {/* 
-                                    <dd><FavouriteButton key={session.id} session={session} /></dd>
-                */}
+                                    <dd className='c-fields__room'>{getRoom(session.room)}</dd>
                                 </dl>
 
                             </div>
@@ -241,6 +238,20 @@ class SessionModal extends React.Component {
         } else {
             return null;
         }
+    }
+}
+
+function getRoom(room) {
+    if(room === 'Room 1') {
+        return 'Cosmos 2';
+    } else if(room === 'Room 2') {
+        return 'Cosmos 1A';
+    } else if(room === 'Room 3') {
+        return 'Cosmos 1B';
+    } else if(room === 'Room 4') {
+        return 'Cosmos 3A';
+    } else if(room === 'Room 5') {
+        return 'Cosmos 3B';
     }
 }
 
