@@ -189,28 +189,40 @@ class SessionModal extends React.Component {
         if(session) {
             const session = this.props.session;
             const closeModal = () => setModalSession(null);
-
+            const startTime = new Date(session.startTime);
+            const endTime = new Date(session.endTime);
             return <section className='c-modal' onClick={closeModal}>
               <div className="c-modal__inner" onClick={(e) => e.stopPropagation()}  >
                 <button className='c-session-modal__close' onClick={closeModal}>close</button>
                 <article className='c-session-modal__open-session c-open-session'>
                     <header className="c-modal__header">
-                        <h1 className='accent-border inline-block'>{session.title}</h1>
+                        <h1 className='accent-border'>{session.title}</h1>
                         <div className='c-open-session__info c-session-info'>
                             <div className='c-session-info__fields c-fields'>
-                                <dl className='c-field'>
-                                    <dt>Name:</dt>
-                                    <dd className='c-fields__name'>
-                                      {session.speakers.map(s => s.name)}
-                                    </dd>
-                                    <dt>Time:</dt>
-                                    <dt className='c-fields__time'>
-                                        {session.startTime}
-                                    </dt>
-                                    <dt>Room:</dt>
-                                    <dd className='c-fields__room'>{getRoom(session.room)}</dd>
-                                </dl>
-
+                                <div className='c-field'>
+                                    <div className="c-row">
+                                        <span>Name:</span>
+                                        <span className='c-fields__name'>
+                                          {session.speakers.map(s => s.name)}
+                                        </span>
+                                    </div>
+                                    <div className="c-row">
+                                        <span>Time:</span>
+                                        <span className='c-fields__time'>
+                                        {new Intl.DateTimeFormat('en-GB', {
+                                              hour: 'numeric',
+                                              minute: 'numeric'
+                                          }).format(startTime)} - {new Intl.DateTimeFormat('en-GB', {
+                                                hour: 'numeric',
+                                                minute: 'numeric'
+                                            }).format(endTime)}
+                                        </span>
+                                    </div>
+                                    <div className="c-row">
+                                        <span>Room:</span>
+                                        <span className='c-fields__room'>{getRoom(session.room)}</span>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
