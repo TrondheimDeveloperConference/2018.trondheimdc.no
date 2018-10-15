@@ -71,10 +71,16 @@ class Session extends React.Component {
 
     static getRegistration(sessionId) {
         if(programutvikling.indexOf(sessionId) !== -1) {
-            return <p>
-                Registration: Choose this workshop when buying <a href='https://tdc.hoopla.no/sales/2829805313'>your ticket</a> for a discounted bundle price. 
-                You can also order ticket for the workshop directly from <a href='https://programutvikling.no/search/results?q=trondheim&submit=Search'>ProgramUtvikling</a>.
-            </p>
+            return [
+                <p>
+                    Registration: Choose this workshop when buying <a href='https://tdc.hoopla.no/sales/2829805313'>your ticket</a> for a discounted bundle price. 
+                    You can also order ticket for the workshop directly from <a href='https://programutvikling.no/search/results?q=trondheim&submit=Search'>ProgramUtvikling</a>.
+                </p>,
+                <p>
+                    Location: <a href='https://goo.gl/maps/GKKfnY4yAJr'>Radisson Blu Royal Garden Hotel</a><br />
+                    Time both days: 9:00 - 17:00
+                </p>
+            ]
         } else if (sessionId === java) {
             return <p>
                 Registration: <a href='https://www.meetup.com/javaBin-Trondheim/events/252158179/'> at Meetup.com</a>
