@@ -117,6 +117,18 @@ class Session extends React.Component {
     render() {
         const session = this.props.session;
         const favouriteClass = session.isFavourite ? 'c-session--favourite' : '';
+        const sessionRoom = "";
+        if(session.room == "Room 1"){
+            sessionRoom = " Cosmos 2";
+        }else if(session.room == "Room 2"){
+            sessionRoom = " Cosmos 1A";
+        }else if(session.room == "Room 3"){
+            sessionRoom = " Cosmos 1B";
+        }else if(session.room == "Room 4"){
+            sessionRoom = " Cosmos 3A";
+        }else if(session.room == "Room 5"){
+            sessionRoom = " Cosmos 3B";
+        }
         return <article className={`c-session ${favouriteClass} length${session.length}`} onClick={() => setModalSession(session)} style={{ '--room': session.room.replace(' ', '').toLowerCase()}}>
             <h1 className='c-session__info'>
               <span className='c-session_title__title'>{session.title}</span>
@@ -129,7 +141,9 @@ class Session extends React.Component {
                   }, '')
                 }
                 <span className="hidden-on-desktop c-session__room">,
-                <span className=' text-white block text-bold mr-4'> {session.room}</span>
+                    <span className=' text-white block text-bold mr-4'>
+                        {sessionRoom}
+                    </span>
                 </span>
             </div>
             <div className="c-session__expanded">
