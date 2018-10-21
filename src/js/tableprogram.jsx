@@ -102,6 +102,20 @@ class Program extends React.Component {
                           {slot.sessions.map(session => <Session session={session} key={session.sessionId} />)}
                         </div>
                     </div>))}
+                <div className="c-slot party">
+                    <h3 className='c-slot__time m-0 text-white'>
+                        <div className="accent-border inline-block text-bold">
+                            18:00
+                        </div>
+                    </h3>
+                    <div className="c-slot__sessions">
+                        <article className='c-session'>
+                            <h1 className="c-session__info">
+                                <span className="c-session_title__title">Party!</span>
+                            </h1>
+                        </article>
+                    </div>
+                </div>
             </section>
         <SessionModal key="omg" session={highlighted} />
         </div>;
