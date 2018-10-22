@@ -111,7 +111,7 @@ class Program extends React.Component {
                     <div className="c-slot__sessions">
                         <article className='c-session'>
                             <h1 className="c-session__info">
-                                <span className="c-session_title__title">Party!</span>
+                                <span className="c-session_title__title">Party! Free sausages and drinks!</span>
                             </h1>
                         </article>
                     </div>
@@ -204,8 +204,8 @@ class SessionModal extends React.Component {
         if(session) {
             const session = this.props.session;
             const closeModal = () => setModalSession(null);
-            const startTime = new Date(session.startTime);
-            const endTime = new Date(session.endTime);
+            const startTime = new Date(session.startTimeZulu);
+            const endTime = new Date(session.endTimeZulu);
             return <section className='c-modal' onClick={closeModal}>
               <div className="c-modal__inner" onClick={(e) => e.stopPropagation()}  >
                 <button className='c-session-modal__close' onClick={closeModal}>close</button>
@@ -224,12 +224,18 @@ class SessionModal extends React.Component {
                                     <div className="c-row">
                                         <span>Time:</span>
                                         <span className='c-fields__time'>
-                                        {new Intl.DateTimeFormat('en-GB', {
+                                        {new Intl.DateTimeFormat('no-NO', {
                                               hour: 'numeric',
-                                              minute: 'numeric'
-                                          }).format(startTime)} - {new Intl.DateTimeFormat('en-GB', {
+                                              minute: 'numeric',
+                                              hour12: false,
+                                              hourCycle: 'h24',
+                                              timeZone: 'Europe/Oslo'
+                                          }).format(startTime)} - {new Intl.DateTimeFormat('no-NO', {
                                                 hour: 'numeric',
-                                                minute: 'numeric'
+                                                minute: 'numeric',
+                                                hour12: false,
+                                                hourCycle: 'h24',
+                                                timeZone: 'Europe/Oslo'
                                             }).format(endTime)}
                                         </span>
                                     </div>
